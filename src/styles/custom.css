@@ -1,0 +1,10 @@
+:root {
+  --sl-content-width: 70rem;
+}
+
+:root:is(:root),
+::backdrop:is(::backdrop) {
+  --sl-color-accent-low: orange;
+  --sl-color-accent: orange;
+  --sl-color-accent-high: orange;
+}

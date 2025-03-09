@@ -1,0 +1,97 @@
+---
+title: Filtering
+description: Feature filter.
+head:
+  - tag: title
+    content: 'Filtering | adonisjs-api-query | EienJS'
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+The `filter` query parameters can be used to add `where` clauses to your Model query. Out of the box
+we support filtering results by partial attribute value, exact attribute value or even if an
+attribute value exists in a given array of values. For anything more advanced, custom filters can be
+used.
+
+By default, all filters have to be explicitly allowed using `allowedFilters`. This method takes an
+array of strings or `AllowedFilter` instances. An allowed filter can be partial, beginsWithStrict,
+endsWithStrict, exact or custom. By default, any string values passed to `allowedFilters()` will
+automatically be converted to `AllowedFilter.partial()` filters.
+
+## Basic Usage
+
+```ts
+// GET /users?filter[name]=john&filter[email]=gmail
+
+const users = await User.query().allowedFilters('name', 'email');
+
+// users will contain all users with "john" in their name AND "gmail" in their email address
+```
+
+You can specify multiple matching filter values by passing a comma separated list of values:
+
+```ts
+// GET /users?filter[name]=seb,freek
+
+const users = await User.query().allowedFilters('name');
+
+// users will contain all users that contain "seb" or "freek" in their name
+```
+
+By passing column name strings to `allowedFilters`, **partial** filters are automatically applied.
+
+## Disallowed filters
+
+Finally, when trying to filter on properties than have not been explicitly allowed using
+`allowedFilters`, an `InvalidFilterQuery` exception will be thrown along with a list of allowed
+filters.
+
+## Disable InvalidFilterQuery exception
+
+You can set in configuration file to not thrown an InvalidFilterQuery exception when a filter is not
+set in allowedFilter method. This does **not** allow using any filter, it just disables the
+exception.
+
+```ts
+disableInvalidFilterQueryException: true;
+```
+
+By default this is set to `false`.
+
+## Partial, beginsWithStrict and endsWithStrict filters
+
+By default, all values passed to `allowedFilters` are converted to partial filters. The underlying
+query will be modified to use a `LOWER(%value%) LIKE` statement. Because this can cause missed
+indexes, it's often worth considering a `beginsWithStrict` filter for the beginning of the value, or
+an `endsWithStrict` filter for the end of the value. These filters will use a `LIKE value%`
+statement and a `LIKE %value` statement respectively, instead of the default partial filter.
+
+## Exact filters
+
+When filtering IDs, boolean values or a literal string, you'll want to use exact filters. This way
+`/users?filter[id]=1` won't match all users having the digit `1` in their ID.
+
+Exact filters can be added using `AllowedFilter.exact('propertyName')` in the `allowedFilters()`
+method.
+
+```ts
+import { AllowedFilter } from '@eienjs/adonisjs-api-query';
+
+// GET /users?filter[name]=John%20Doe
+
+const users = await User.query().allowedFilters(AllowedFilter.exact('name'));
+
+// only users with the exact name "John Doe"
+```
+
+The query builder will automatically map `1`, `0`, `true` and `false` as boolean values and a comma separated list of values as an array:
+
+```ts
+import { AllowedFilter } from '@eienjs/adonisjs-api-query';
+
+// GET /users?filter[id]=1,2,3,4,5&filter[admin]=true
+
+const users = await User.query().allowedFilters(AllowedFilter.exact('id'), AllowedFilter.exact('admin'));
+
+// users will contain all admin users with id 1, 2, 3, 4 or 5
+```

@@ -1,0 +1,109 @@
+---
+title: 'adonisjs-api-query'
+description: Easily build Lucid queries from API requests.
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+This package provides a set of methods to filter, sort and include models relations based on a
+request. Query parameter names follow the [JSON API spec](https://jsonapi.org) as closely as
+possible. It's inspired by
+[Laravel Query Builder Spatie](https://spatie.be/docs/laravel-query-builder/v6/introduction).
+
+## Installation
+
+Install and configure Adonisjs Api Query using the following command.
+
+```sh
+node ace add @eienjs/adonisjs-api-query
+```
+
+The package will automatically register its service provider.
+
+<Aside>
+
+Steps performed by the configure command:
+
+<Steps>
+
+1. Register the following service provider inside the `adonisrc.ts` file.
+
+   ```ts
+   {
+    providers: [
+      // ... other providers
+      () => import('@eienjs/adonisjs-api-query/api_query_provider'),
+    ],
+   }
+   ```
+
+2. Create the `config/apiquery.ts` file.
+
+3. Install required peer dependencies.
+
+</Steps>
+
+</Aside>
+
+## Basic Usage
+
+If you're enable
+[Async local storage](https://docs.adonisjs.com/guides/concepts/async-local-storage) not need extra
+steps to use this package. Otherwise you need pass first request to query builder. For example:
+
+```ts
+import { type HttpContext } from '@adonisjs/core/http';
+import User from '#models/user';
+
+// inside a controller
+export default class MyController {
+  public async handle({ request }: HttpContext) {
+    const users = await User.query()
+      .withRequest(request) // Pass the request to the query builder if async local storage is not enabled
+      .allowedFilters('name')
+      .allowedIncludes('posts')
+      .allowedSorts('id');
+  }
+}
+```
+
+### Filter a query based on a request
+
+Request: `/users?filter[name]=John`
+
+```ts
+const users = await User.query().allowedFilters('name');
+
+// all Users that contain the string "John" in their name
+```
+
+### Including relations based on a request
+
+Request: `/users?include=posts`
+
+```ts
+const users = await User.query().allowedIncludes('posts');
+
+// all Users with their posts loaded
+```
+
+### Sorting a query based on a request
+
+Request: `/users?sort=id`
+
+```ts
+const users = await User.query().allowedSorts('id');
+
+// all Users sorted by ascending id
+```
+
+### Works together nicely with existing queries
+
+```ts
+const users = await User.query()
+  .where('active', true)
+  .allowedFilters('name')
+  .allowedIncludes('posts', 'permissions')
+  .allowedSorts('id')
+  .paginate(1, 10);
+```

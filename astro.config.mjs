@@ -57,6 +57,10 @@ export default defineConfig({
                   label: 'Sorting',
                   link: '/packages/adonisjs-api-query/sorting',
                 },
+                {
+                  label: 'Including relationships',
+                  link: '/packages/adonisjs-api-query/including-relationships',
+                },
               ],
             },
           ],

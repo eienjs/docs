@@ -1,0 +1,58 @@
+---
+title: Including relationships
+description: Feature Including relationships.
+head:
+  - tag: title
+    content: 'Including relationships | adonisjs-api-query | EienJS'
+---
+
+The `include` query parameter will load any Model relation or relation count on the resulting
+models. All includes must be explicitly allowed using `allowedIncludes`. This method takes an array
+of relationship names or `AllowedInclude` instances.
+
+## Basic Usage
+
+```ts
+// GET /users?include=posts
+
+const users = await User.query().allowedIncludes('posts');
+
+// users will contain all users with their posts loaded
+```
+
+You can specify multiple relationships by separating them with a comma:
+
+```ts
+// GET /users?include=posts,permissions
+
+const users = await User.query().allowedIncludes('posts', 'permissions');
+
+// users will contain all users with their posts and permissions loaded
+```
+
+## Default includes
+
+There is no way to include relationships by default in this package. Default relationships are
+built-in to query builder itself using the `preload` method on the query:
+
+```ts
+const users = await User.query().allowedIncludes('friends').preload('posts').withCount('posts');
+```
+
+## Disallowed includes
+
+When trying to include a relationship that's not specified in `allowedIncludes`, an
+`InvalidIncludeQuery` exception will be thrown. Its exception message contains the allowed includes
+for reference.
+
+## Nested relationships
+
+You can load nested relationships using the dot notation.
+
+```ts
+// GET /users?include=posts.comments,permissions
+
+const users = await User.query().allowedIncludes('posts.comments', 'permissions');
+
+// users will contain all users with their posts, comments on their posts and permissions loaded
+```

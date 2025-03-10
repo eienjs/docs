@@ -53,6 +53,10 @@ export default defineConfig({
                   label: 'Filtering',
                   link: '/packages/adonisjs-api-query/filtering',
                 },
+                {
+                  label: 'Sorting',
+                  link: '/packages/adonisjs-api-query/sorting',
+                },
               ],
             },
           ],

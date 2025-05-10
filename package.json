@@ -16,10 +16,15 @@
     "prettier": "^3.5.3"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.32.2",
-    "astro": "^5.4.2",
-    "sharp": "^0.33.5",
-    "starlight-theme-rapide": "^0.4.0"
+    "@astrojs/starlight": "^0.34.3",
+    "astro": "^5.7.12",
+    "sharp": "^0.34.1",
+    "starlight-theme-nova": "^0.7.2"
   },
-  "packageManager": "pnpm@10.5.2"
+  "packageManager": "pnpm@10.10.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
+  }
 }

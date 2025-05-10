@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import starlightThemeRapide from 'starlight-theme-rapide';
+import starlightThemeNova from 'starlight-theme-nova';
 
 const footerText = `© ${new Date().getFullYear()} EienJS - Made with ❤️ and open source mind`;
 
@@ -10,7 +10,7 @@ export default defineConfig({
   site: 'https://eienjs.com',
   integrations: [
     starlight({
-      plugins: [starlightThemeRapide()],
+      plugins: [starlightThemeNova()],
       title: 'EienJS',
       tagline: 'Libraries for work together with AdonisJS',
       description: 'EienJS is a suite of libraries for work together with AdonisJS',
@@ -18,9 +18,7 @@ export default defineConfig({
       logo: {
         src: './src/assets/eienjs_logo.webp',
       },
-      social: {
-        github: 'https://github.com/eienjs',
-      },
+      social: [{ icon: 'github', label: 'Github', href: 'https://github.com/eienjs' }],
       editLink: {
         baseUrl: 'https://github.com/eienjs/docs/edit/main',
       },

@@ -61,6 +61,20 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              label: 'adonisjs-jsend',
+              collapsed: true,
+              items: [
+                {
+                  label: 'Installation',
+                  link: '/packages/adonisjs-jsend/getting-started',
+                },
+                {
+                  label: 'Specification',
+                  link: '/packages/adonisjs-jsend/specification',
+                },
+              ],
+            },
           ],
         },
       ],

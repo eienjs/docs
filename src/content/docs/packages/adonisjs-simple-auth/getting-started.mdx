@@ -1,0 +1,101 @@
+---
+title: 'adonisjs-simple-auth'
+description: Single authentication using api key that allows authenticate.
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+This package enables you to create a single authentication key that allows you to authenticate just
+by including the key. This simplicity also allows a user to make calls easily, with cURL, with
+interactive docs, or even in their browser.
+
+## Installation
+
+Install and configure Adonisjs Api Query using the following command.
+
+```sh
+node ace add @eienjs/adonisjs-simple-auth
+```
+
+The package will automatically register its service provider.
+
+<Aside>
+<details>
+<summary>Steps performed by the configure command</summary>
+
+<Steps>
+
+1. Register the following service provider inside the `adonisrc.ts` file.
+
+   ```ts
+   {
+    providers: [
+      // ... other providers
+      () => import('@eienjs/adonisjs-simple-auth/simple_auth_provider'),
+    ],
+   }
+   ```
+
+2. Register command for generating the api key.
+
+   ```ts
+   {
+     commands: [
+       // ... other commands
+       () => import('@eienjs/adonisjs-simple-auth/commands'),
+     ],
+   }
+   ```
+
+3. Register middleware for init auth service and for protecting routes in the `start/kernel.ts`
+   file.
+
+   ```ts
+   router.use([
+     // ... other middlewares
+     () => import('@eienjs/adonisjs-simple-auth/simple_auth_middleware'),
+   ]);
+
+   export const middleware = router.named({
+     // ... other named middlewares
+     apiKey: () => import('#middleware/api_key_middleware'),
+   });
+   ```
+
+4. Create the `config/simpleauth.ts` file.
+
+5. Create the middleware `app/middleware/api_key_middleware.ts` file.
+
+6. Install required peer dependencies.
+
+</Steps>
+
+</details>
+</Aside>
+
+## Basic Usage
+
+In your routes, you can protect routes using the `apiKey` middleware.
+
+```ts
+import router from '@adonisjs/core/services/router';
+import { middleware } from '#start/kernel';
+
+const HealthChecksController = () => import('#controllers/health_checks_controller');
+
+const api = (): void => {
+  router
+    .get('/', (ctx) => {
+      ctx.response.jsendSuccess('Service is up and running');
+    })
+    .as('main');
+
+  router.get('/health', [HealthChecksController]).use(middleware.apiKey()).as('health');
+};
+
+export default api;
+```
+
+The api key middleware will check if the request has a `api_key` or custom header key set. It will
+check if the key is valid. If it is, the request will be allowed to continue. If not, it will return
+a 401 status code.

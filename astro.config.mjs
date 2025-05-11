@@ -75,6 +75,24 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              label: 'adonisjs-simple-auth',
+              collapsed: true,
+              items: [
+                {
+                  label: 'Installation',
+                  link: '/packages/adonisjs-simple-auth/getting-started',
+                },
+                {
+                  label: 'Commands',
+                  link: '/packages/adonisjs-simple-auth/commands',
+                },
+                {
+                  label: 'Testing',
+                  link: '/packages/adonisjs-simple-auth/testing',
+                },
+              ],
+            },
           ],
         },
       ],

@@ -1,0 +1,21 @@
+---
+title: Commands
+description: Commands.
+head:
+  - tag: title
+    content: 'Commands | adonisjs-simple-auth | EienJS'
+---
+
+The package provides a command to generate a new API KEY. You can use this command to generate a new
+API KEY and save it in your `.env` file as the `API_KEY` environment variable.
+
+```sh
+node ace generate:api-key
+```
+
+Flags available:
+
+- `--show`: Display the key on the terminal instead of writing it to the `.env` file. By default,
+  the key is written to the env file.
+- `--force`: The `generate:api-key` command does not write the key to the `.env` file when running
+  your application in production. However, you can use the `--force` flag to override this behavior.

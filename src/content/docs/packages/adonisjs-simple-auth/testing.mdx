@@ -1,0 +1,60 @@
+---
+title: Testing
+description: Testing.
+head:
+  - tag: title
+    content: 'Testing | adonisjs-simple-auth | EienJS'
+---
+
+You can test your API KEY authentication using the `simpleAuthApiClient` japa plugin to authenticate
+when making HTTP requests to your API.
+
+```ts title="tests/bootstrap.ts"
+import { simpleAuthApiClient } from '@eienjs/adonisjs-simple-auth/plugins/api_client'; // [!code highlight]
+
+export const plugins: Config['plugins'] = [
+  assert(),
+  simpleAuthApiClient(app), // [!code highlight]
+  pluginAdonisJS(app),
+];
+```
+
+That's all. Now, you can authenticate requests using the `withApiKey` method.
+
+```ts title="tests/functional/health_checks.spec.ts"
+import { test } from '@japa/runner';
+
+test.group('Health checks', () => {
+  const endpoint = 'api.health';
+
+  test('server is healthy', async ({ client, route }) => {
+    const response = await client.get(route(endpoint)).withApiKey(); // [!code highlight]
+
+    if (response.status() === 400) {
+      const { data } = response.body();
+      console.info(data);
+    }
+
+    response.assertOk();
+    response.assertBodyContains({
+      status: 'success',
+      data: {
+        isHealthy: true,
+      },
+    });
+  });
+
+  test('unauthorized access', async ({ client, route }) => {
+    const response = await client.get(route(endpoint));
+
+    response.assertUnauthorized();
+    response.assertBodyContains({
+      errors: [
+        {
+          message: 'Unauthorized access',
+        },
+      ],
+    });
+  });
+});
+```

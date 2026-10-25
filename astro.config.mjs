@@ -12,7 +12,6 @@ export default defineConfig({
     starlight({
       plugins: [starlightThemeNova()],
       title: 'EienJS',
-      tagline: 'Libraries for work together with AdonisJS',
       description: 'EienJS is a suite of libraries for work together with AdonisJS',
       favicon: '/favicon.ico',
       logo: {

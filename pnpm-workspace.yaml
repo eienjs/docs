@@ -1,0 +1,17 @@
+minimumReleaseAge: 1440
+minimumReleaseAgeExcludePrune: true
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 2880
+shellEmulator: true
+
+allowBuilds:
+  sharp: true
+  "@parcel/watcher": false
+  "@tailwindcss/oxide": false
+  esbuild: false
+  unrs-resolver: false
+  vue-demi: false
+
+permissions:
+  nuxt-og-image:
+    skills: false

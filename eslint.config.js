@@ -11,4 +11,5 @@ export default eienjs({
     erasableSyntaxOnly: true,
   },
   pnpm: true,
+  markdown: false,
 });

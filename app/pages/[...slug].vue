@@ -12,35 +12,33 @@ const { toc } = useAppConfig();
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation');
 const routePath = computed(() => withoutTrailingSlash(route.path));
 
-const { data: page } = await useAsyncData(routePath.value, async () => queryCollection('docs').path(routePath.value).first());
+const { data: page } = await useAsyncData(() => routePath.value, async () => queryCollection('docs').path(routePath.value).first(), { watch: [routePath] });
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
 }
 
-const { data: surround } = await useAsyncData(`${routePath.value}-surround`, async () => {
+const { data: surround } = await useAsyncData(() => `${routePath.value}-surround`, async () => {
   return queryCollectionItemSurroundings('docs', routePath.value, {
     fields: ['description'],
   });
-});
+}, { watch: [routePath] });
 
-const title = page.value.seo.title || page.value.title;
-const description = page.value.seo.description || page.value.description;
+const title = computed(() => page.value?.seo.title || page.value?.title);
+const description = computed(() => page.value?.seo.description || page.value?.description);
 
 useSeoMeta({
-  title,
-  ogTitle: title,
-  description,
-  ogDescription: description,
+  title: () => title.value,
+  ogTitle: () => title.value,
+  description: () => description.value,
+  ogDescription: () => description.value,
 });
 
 const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path));
 
-defineOgImage('Docs', { title, description, headline: headline.value });
-
 const links = computed(() => {
-  const links = [];
+  const items: { icon: string; label: string; to: string; target?: string }[] = [];
   if (toc.bottom.edit) {
-    links.push({
+    items.push({
       icon: 'i-lucide-external-link',
       label: 'Edit this page',
       to: `${toc.bottom.edit}/${page.value?.stem}.${page.value?.extension}`,
@@ -48,20 +46,20 @@ const links = computed(() => {
     });
   }
 
-  return [...links, ...(toc.bottom.links || [])].filter(Boolean);
+  return [...items, ...toc.bottom.links].filter(Boolean);
 });
 </script>
 
 <template>
-  <UPage v-if="page">
+  <UPage>
     <UPageHeader
-      :title="page.title"
-      :description="page.description"
+      :title="page!.title"
+      :description="page!.description"
       :headline="headline"
     >
       <template #links>
         <UButton
-          v-for="(link, index) in page.links"
+          v-for="(link, index) in page!.links"
           :key="index"
           v-bind="link"
         />
@@ -72,8 +70,7 @@ const links = computed(() => {
 
     <UPageBody>
       <ContentRenderer
-        v-if="page"
-        :value="page"
+        :value="page!"
       />
 
       <USeparator v-if="surround?.length" />
@@ -111,5 +108,4 @@ const links = computed(() => {
       </UContentToc>
     </template>
   </UPage>
-  <div v-else />
 </template>

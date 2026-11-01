@@ -10,12 +10,12 @@ const site = useSiteConfig();
 const routePath = computed(() => withoutTrailingSlash(route.path));
 const mdPath = computed(() => `${site.url}/raw${routePath.value}.md`);
 
-const items = [
+const items = computed(() => [
   {
     label: 'Copy Markdown link',
     icon: 'i-tabler-link',
     onSelect() {
-      copy(mdPath.value);
+      void copy(mdPath.value);
       toast.add({
         title: 'Copied to clipboard',
         icon: 'i-tabler-check',
@@ -34,7 +34,7 @@ const items = [
     target: '_blank',
     to: `https://chatgpt.com/?hints=search&q=${encodeURIComponent(`Read ${mdPath.value} so I can ask questions about it.`)}`,
   },
-];
+]);
 
 async function copyPage() {
   void copy(await $fetch<string>(`/raw${routePath.value}.md`));

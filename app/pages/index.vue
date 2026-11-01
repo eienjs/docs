@@ -19,10 +19,8 @@ useSeoMeta({
 
 <template>
   <ContentRenderer
-    v-if="page"
-    :value="page"
+    :value="page!"
     :prose="false"
     :components="{ a: 'prose-a' }"
   />
-  <div v-else />
 </template>

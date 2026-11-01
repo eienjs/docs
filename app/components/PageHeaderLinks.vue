@@ -1,49 +1,43 @@
 <script setup lang="ts">
-import { useClipboard } from '@vueuse/core'
-import { withoutTrailingSlash } from 'ufo'
+import { useClipboard } from '@vueuse/core';
+import { withoutTrailingSlash } from 'ufo';
 
-const route = useRoute()
-const toast = useToast()
-const { copy, copied } = useClipboard()
-const site = useSiteConfig()
+const route = useRoute();
+const toast = useToast();
+const { copy, copied } = useClipboard();
+const site = useSiteConfig();
 
-const routePath = computed(() => withoutTrailingSlash(route.path))
-const mdPath = computed(() => `${site.url}/raw${routePath.value}.md`)
+const routePath = computed(() => withoutTrailingSlash(route.path));
+const mdPath = computed(() => `${site.url}/raw${routePath.value}.md`);
 
 const items = [
   {
     label: 'Copy Markdown link',
-    icon: 'i-lucide-link',
+    icon: 'i-tabler-link',
     onSelect() {
-      copy(mdPath.value)
+      copy(mdPath.value);
       toast.add({
         title: 'Copied to clipboard',
-        icon: 'i-lucide-check-circle'
-      })
-    }
+        icon: 'i-tabler-check',
+      });
+    },
   },
   {
     label: 'View as Markdown',
-    icon: 'i-simple-icons:markdown',
+    icon: 'i-tabler-markdown',
     target: '_blank',
-    to: `/raw${routePath.value}.md`
+    to: `/raw${routePath.value}.md`,
   },
   {
     label: 'Open in ChatGPT',
-    icon: 'i-simple-icons:openai',
+    icon: 'i-tabler-brand-openai',
     target: '_blank',
-    to: `https://chatgpt.com/?hints=search&q=${encodeURIComponent(`Read ${mdPath.value} so I can ask questions about it.`)}`
+    to: `https://chatgpt.com/?hints=search&q=${encodeURIComponent(`Read ${mdPath.value} so I can ask questions about it.`)}`,
   },
-  {
-    label: 'Open in Claude',
-    icon: 'i-simple-icons:anthropic',
-    target: '_blank',
-    to: `https://claude.ai/new?q=${encodeURIComponent(`Read ${mdPath.value} so I can ask questions about it.`)}`
-  }
-]
+];
 
 async function copyPage() {
-  copy(await $fetch<string>(`/raw${routePath.value}.md`))
+  void copy(await $fetch<string>(`/raw${routePath.value}.md`));
 }
 </script>
 
@@ -51,11 +45,11 @@ async function copyPage() {
   <UFieldGroup>
     <UButton
       label="Copy page"
-      :icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+      :icon="copied ? 'i-tabler-check' : 'i-tabler-copy'"
       color="neutral"
       variant="outline"
       :ui="{
-        leadingIcon: [copied && 'text-primary', 'size-3.5']
+        leadingIcon: [copied && 'text-primary', 'size-3.5'],
       }"
       @click="copyPage"
     />
@@ -64,14 +58,14 @@ async function copyPage() {
       :content="{
         align: 'end',
         side: 'bottom',
-        sideOffset: 8
+        sideOffset: 8,
       }"
       :ui="{
-        content: 'w-48'
+        content: 'w-48',
       }"
     >
       <UButton
-        icon="i-lucide-chevron-down"
+        icon="i-tabler-chevron-down"
         size="sm"
         color="neutral"
         variant="outline"

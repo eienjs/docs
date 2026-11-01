@@ -1,55 +1,55 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
-import { findPageHeadline } from '@nuxt/content/utils'
-import { withoutTrailingSlash } from 'ufo'
+import type { ContentNavigationItem } from '@nuxt/content';
+import { findPageHeadline } from '@nuxt/content/utils';
+import { withoutTrailingSlash } from 'ufo';
 
 definePageMeta({
-  layout: 'docs'
-})
+  layout: 'docs',
+});
 
-const route = useRoute()
-const { toc } = useAppConfig()
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
-const routePath = computed(() => withoutTrailingSlash(route.path))
+const route = useRoute();
+const { toc } = useAppConfig();
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation');
+const routePath = computed(() => withoutTrailingSlash(route.path));
 
-const { data: page } = await useAsyncData(routePath.value, () => queryCollection('docs').path(routePath.value).first())
+const { data: page } = await useAsyncData(routePath.value, async () => queryCollection('docs').path(routePath.value).first());
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
 }
 
-const { data: surround } = await useAsyncData(`${routePath.value}-surround`, () => {
+const { data: surround } = await useAsyncData(`${routePath.value}-surround`, async () => {
   return queryCollectionItemSurroundings('docs', routePath.value, {
-    fields: ['description']
-  })
-})
+    fields: ['description'],
+  });
+});
 
-const title = page.value.seo?.title || page.value.title
-const description = page.value.seo?.description || page.value.description
+const title = page.value.seo.title || page.value.title;
+const description = page.value.seo.description || page.value.description;
 
 useSeoMeta({
   title,
   ogTitle: title,
   description,
-  ogDescription: description
-})
+  ogDescription: description,
+});
 
-const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path))
+const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path));
 
-defineOgImage('Docs', { title, description, headline: headline.value })
+defineOgImage('Docs', { title, description, headline: headline.value });
 
 const links = computed(() => {
-  const links = []
-  if (toc?.bottom?.edit) {
+  const links = [];
+  if (toc.bottom.edit) {
     links.push({
       icon: 'i-lucide-external-link',
       label: 'Edit this page',
-      to: `${toc.bottom.edit}/${page?.value?.stem}.${page?.value?.extension}`,
-      target: '_blank'
-    })
+      to: `${toc.bottom.edit}/${page.value?.stem}.${page.value?.extension}`,
+      target: '_blank',
+    });
   }
 
-  return [...links, ...(toc?.bottom?.links || [])].filter(Boolean)
-})
+  return [...links, ...(toc.bottom.links || [])].filter(Boolean);
+});
 </script>
 
 <template>
@@ -111,4 +111,5 @@ const links = computed(() => {
       </UContentToc>
     </template>
   </UPage>
+  <div v-else />
 </template>

@@ -8,7 +8,6 @@ definePageMeta({
 });
 
 const route = useRoute();
-const { toc } = useAppConfig();
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation');
 const routePath = computed(() => withoutTrailingSlash(route.path));
 
@@ -34,20 +33,6 @@ useSeoMeta({
 });
 
 const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path));
-
-const links = computed(() => {
-  const items: { icon: string; label: string; to: string; target?: string }[] = [];
-  if (toc.bottom.edit) {
-    items.push({
-      icon: 'i-lucide-external-link',
-      label: 'Edit this page',
-      to: `${toc.bottom.edit}/${page.value?.stem}.${page.value?.extension}`,
-      target: '_blank',
-    });
-  }
-
-  return [...items, ...toc.bottom.links].filter(Boolean);
-});
 </script>
 
 <template>
@@ -56,17 +41,7 @@ const links = computed(() => {
       :title="page!.title"
       :description="page!.description"
       :headline="headline"
-    >
-      <template #links>
-        <UButton
-          v-for="(link, index) in page!.links"
-          :key="index"
-          v-bind="link"
-        />
-
-        <PageHeaderLinks />
-      </template>
-    </UPageHeader>
+    />
 
     <UPageBody>
       <ContentRenderer
@@ -77,35 +52,5 @@ const links = computed(() => {
 
       <UContentSurround :surround="surround" />
     </UPageBody>
-
-    <template
-      v-if="page?.body?.toc?.links?.length"
-      #right
-    >
-      <UContentToc
-        :title="toc?.title"
-        :links="page.body?.toc?.links"
-      >
-        <template
-          v-if="toc?.bottom"
-          #bottom
-        >
-          <div
-            class="hidden lg:block space-y-6"
-            :class="{ 'mt-6!': page.body?.toc?.links?.length }"
-          >
-            <USeparator
-              v-if="page.body?.toc?.links?.length"
-              type="dashed"
-            />
-
-            <UPageLinks
-              :title="toc.bottom.title"
-              :links="links"
-            />
-          </div>
-        </template>
-      </UContentToc>
-    </template>
   </UPage>
 </template>

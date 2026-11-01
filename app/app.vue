@@ -28,7 +28,7 @@ provide('navigation', navigation);
 
 <template>
   <UApp>
-    <NuxtLoadingIndicator />
+    <NuxtLoadingIndicator color="#DF3927" />
 
     <AppHeader />
 
@@ -37,8 +37,6 @@ provide('navigation', navigation);
         <NuxtPage />
       </NuxtLayout>
     </UMain>
-
-    <AppFooter />
 
     <ClientOnly>
       <LazyUContentSearch

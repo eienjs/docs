@@ -222,61 +222,17 @@ export default defineAppConfig({
     },
   },
   seo: {
-    siteName: 'Nuxt Docs Template',
+    siteName: 'EienJS - Packages for AdonisJS and more',
   },
   header: {
-    title: '',
     to: '/',
-    logo: {
-      alt: '',
-      light: '',
-      dark: '',
-    },
     search: true,
     colorMode: true,
     links: [{
-      'icon': 'i-tabler-brand-discord',
-      'to': 'https://github.com/nuxt-ui-templates/docs',
+      'icon': 'i-tabler-brand-github',
+      'to': 'https://github.com/eienjs',
       'target': '_blank',
       'aria-label': 'GitHub',
     }],
-  },
-  footer: {
-    credits: `Built with Nuxt UI • © ${new Date().getFullYear()}`,
-    colorMode: false,
-    links: [{
-      'icon': 'i-tabler-brand-discord',
-      'to': 'https://go.nuxt.com/discord',
-      'target': '_blank',
-      'aria-label': 'Nuxt on Discord',
-    }, {
-      'icon': 'i-tabler-brand-x',
-      'to': 'https://go.nuxt.com/x',
-      'target': '_blank',
-      'aria-label': 'Nuxt on X',
-    }, {
-      'icon': 'i-tabler-brand-github',
-      'to': 'https://github.com/nuxt/ui',
-      'target': '_blank',
-      'aria-label': 'Nuxt UI on GitHub',
-    }],
-  },
-  toc: {
-    title: 'Table of Contents',
-    bottom: {
-      title: 'Community',
-      edit: 'https://github.com/nuxt-ui-templates/docs/edit/main/content',
-      links: [{
-        icon: 'i-tabler-star',
-        label: 'Star on GitHub',
-        to: 'https://github.com/nuxt/ui',
-        target: '_blank',
-      }, {
-        icon: 'i-tabler-book',
-        label: 'Nuxt UI docs',
-        to: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
-        target: '_blank',
-      }],
-    },
   },
 });

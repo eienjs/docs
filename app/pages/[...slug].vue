@@ -35,6 +35,9 @@ useSeoMeta({
 
 const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path));
 
+// eslint-disable-next-line vue/no-ref-object-reactivity-loss
+defineOgImage('Docs', { title, description, headline: headline.value });
+
 const links = computed(() => {
   const links = [];
   if (toc.bottom.edit) {
@@ -56,7 +59,11 @@ const links = computed(() => {
       :title="page!.title"
       :description="page!.description"
       :headline="headline"
-    />
+    >
+      <template #links>
+        <PageHeaderLinks />
+      </template>
+    </UPageHeader>
 
     <UPageBody>
       <ContentRenderer

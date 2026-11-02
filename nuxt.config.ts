@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/content',
     'nuxt-og-image',
+    'nuxt-llms',
   ],
   devtools: {
     enabled: true,
@@ -30,6 +31,11 @@ export default defineNuxtConfig({
     nodeTsConfig: {
       include: ['../content.config.ts'],
     },
+  },
+  llms: {
+    domain: 'https://eienjs.com',
+    title: 'EienJS',
+    description: 'EienJS is a collection of packages for AdonisJS and more.',
   },
   ogImage: {
     zeroRuntime: true,

@@ -1,4 +1,15 @@
-import { defineCollection, defineContentConfig } from '@nuxt/content';
+import { defineCollection, defineContentConfig, z } from '@nuxt/content';
+
+const packageSchema = z.object({
+  name: z.string(),
+  title: z.string(),
+  description: z.string(),
+  icon: z.string(),
+  category: z.enum(['adonisjs', 'tooling']),
+  repo: z.string(),
+  version: z.string().optional(),
+  docs: z.boolean().default(false),
+});
 
 export default defineContentConfig({
   collections: {
@@ -10,8 +21,13 @@ export default defineContentConfig({
       type: 'page',
       source: {
         include: '**',
-        exclude: ['index.md'],
+        exclude: ['index.md', 'data/**'],
       },
+    }),
+    packages: defineCollection({
+      type: 'data',
+      source: 'data/packages.json',
+      schema: z.object({ packages: z.array(packageSchema) }),
     }),
   },
 });

@@ -1,62 +1,22 @@
-# Nuxt Docs Template
+# EienJS Docs
 
-[![Nuxt UI](https://img.shields.io/badge/Made%20with-Nuxt%20UI-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com)
+Official documentation for EienJS.
 
-Use this template to build your own documentation with [Nuxt UI](https://ui.nuxt.com) quickly.
+## Package documentation sync
 
-- [Live demo](https://docs-template.nuxt.dev/)
-- [Documentation](https://ui.nuxt.com/docs/getting-started/installation/nuxt)
+Package docs live in each package repo under `docs/` and are published here at `content/2.packages/<repo-name>/`.
 
-<a href="https://docs-template.nuxt.dev/" target="_blank">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://ui.nuxt.com/assets/templates/nuxt/docs-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://ui.nuxt.com/assets/templates/nuxt/docs-light.png">
-    <img alt="Nuxt Docs Template" src="https://ui.nuxt.com/assets/templates/nuxt/docs-light.png">
-  </picture>
-</a>
+1. In the package repo, copy [`.github/templates/notify-docs.yml`](.github/templates/notify-docs.yml) to `.github/workflows/notify-docs.yml`.
+2. Add a `DOCS_SYNC_TOKEN` secret (fine-grained PAT or GitHub App token with `Contents: read & write` on `eienjs/docs`) to the package repo.
+3. Publish a release: the [sync workflow](.github/workflows/sync-package-docs.yml) replaces `content/2.packages/<repo-name>/` with the package's
+   `docs/` folder at the release tag and commits it.
 
-## Quick Start
+You can also run the sync manually from the Actions tab (`Sync package docs` → `Run workflow`).
 
-```bash [Terminal]
-npm create nuxt@latest -- -t ui/docs
+The landing page cards are driven by [`content/data/packages.json`](content/data/packages.json), which the same workflow updates on every sync (description and version come from the package's `package.json`; cards link to the docs once a package ships them). Optionally set the card metadata in the package's `package.json`:
+
+```json
+"eienjs": { "title": "Permission", "icon": "i-tabler-shield-check", "category": "adonisjs" }
 ```
 
-## Deploy your own
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-name=docs&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fdocs&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fdocs-dark.png&demo-url=https%3A%2F%2Fdocs-template.nuxt.dev%2F&demo-title=Nuxt%20Docs%20Template&demo-description=A%20documentation%20template%20powered%20by%20Nuxt%20Content.)
-
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-pnpm install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-pnpm dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-pnpm build
-```
-
-Locally preview production build:
-
-```bash
-pnpm preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-## Renovate integration
-
-Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
+`category` is `adonisjs` or `tooling`. New packages are appended automatically.

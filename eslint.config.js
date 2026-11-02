@@ -12,4 +12,9 @@ export default eienjs({
   },
   pnpm: true,
   markdown: false,
+}).append({
+  files: ['**/*.md'],
+  rules: {
+    '@stylistic/max-len': 'off',
+  },
 });

@@ -1,0 +1,76 @@
+{
+  "packages": [
+    {
+      "name": "adonisjs-permission",
+      "title": "Permission",
+      "description": "Associate users with roles and permissions.",
+      "icon": "i-tabler-shield-check",
+      "category": "adonisjs",
+      "repo": "https://github.com/eienjs/adonisjs-permission",
+      "docs": false
+    },
+    {
+      "name": "adonisjs-api-query",
+      "title": "API Query",
+      "description": "Easily build Lucid queries from API requests.",
+      "icon": "i-tabler-filter",
+      "category": "adonisjs",
+      "repo": "https://github.com/eienjs/adonisjs-api-query",
+      "docs": false
+    },
+    {
+      "name": "adonisjs-soft-deletes",
+      "title": "Soft Deletes",
+      "description": "Soft deletes for AdonisJS models.",
+      "icon": "i-tabler-trash",
+      "category": "adonisjs",
+      "repo": "https://github.com/eienjs/adonisjs-soft-deletes",
+      "docs": false
+    },
+    {
+      "name": "adonisjs-simple-auth",
+      "title": "Simple Auth",
+      "description": "Single authentication using an API key.",
+      "icon": "i-tabler-key",
+      "category": "adonisjs",
+      "repo": "https://github.com/eienjs/adonisjs-simple-auth",
+      "docs": false
+    },
+    {
+      "name": "adonisjs-jsend",
+      "title": "JSend",
+      "description": "Simple helpers to generate JSend-compliant JSON responses.",
+      "icon": "i-tabler-braces",
+      "category": "adonisjs",
+      "repo": "https://github.com/eienjs/adonisjs-jsend",
+      "docs": false
+    },
+    {
+      "name": "adonisjs-sentry",
+      "title": "Sentry",
+      "description": "Sentry service provider for AdonisJS v7.",
+      "icon": "i-tabler-bug",
+      "category": "adonisjs",
+      "repo": "https://github.com/eienjs/adonisjs-sentry",
+      "docs": false
+    },
+    {
+      "name": "eslint-config",
+      "title": "ESLint Config",
+      "description": "The EienJS ESLint config preset.",
+      "icon": "i-tabler-checks",
+      "category": "tooling",
+      "repo": "https://github.com/eienjs/eslint-config",
+      "docs": false
+    },
+    {
+      "name": "adonisjs-pkg-boilerplate",
+      "title": "Package Boilerplate",
+      "description": "A boilerplate for creating AdonisJS packages.",
+      "icon": "i-tabler-package",
+      "category": "tooling",
+      "repo": "https://github.com/eienjs/adonisjs-pkg-boilerplate",
+      "docs": false
+    }
+  ]
+}

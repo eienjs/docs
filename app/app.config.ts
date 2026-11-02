@@ -235,4 +235,17 @@ export default defineAppConfig({
       'aria-label': 'GitHub',
     }],
   },
+  toc: {
+    title: 'Table of Contents',
+    bottom: {
+      title: 'Community',
+      edit: 'https://github.com/eienjs/docs/edit/main/content',
+      links: [{
+        icon: 'i-tabler-star',
+        label: 'Star on GitHub',
+        to: 'https://github.com/eienjs',
+        target: '_blank',
+      }],
+    },
+  },
 });

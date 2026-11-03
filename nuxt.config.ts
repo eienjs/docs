@@ -23,6 +23,11 @@ export default defineNuxtConfig({
       sqliteConnector: 'native',
     },
   },
+  runtimeConfig: {
+    public: {
+      siteUrl: 'https://eienjs.com',
+    },
+  },
   experimental: {
     asyncContext: true,
   },

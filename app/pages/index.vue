@@ -13,7 +13,7 @@ useSeoMeta({
   ogTitle: title,
   description,
   ogDescription: description,
-  ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/docs-light.png',
+  ogImage: 'https://eienjs.com/img/eienjs_site_docs.png',
 });
 </script>
 

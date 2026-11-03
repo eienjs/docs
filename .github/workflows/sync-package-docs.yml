@@ -19,6 +19,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 # Serialize syncs so concurrent releases never race on the push.
 concurrency:
@@ -34,6 +36,9 @@ env:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    outputs:
+      synced: ${{ steps.commit.outputs.synced }}
+      branch: ${{ steps.commit.outputs.branch }}
     steps:
       - name: Validate inputs
         run: |
@@ -53,7 +58,6 @@ jobs:
         uses: actions/checkout@v7
         with:
           path: site
-          token: ${{ secrets.DOCS_SYNC_TOKEN || github.token }}
           fetch-depth: 0
 
       - name: Checkout package repo
@@ -91,15 +95,27 @@ jobs:
           fi
 
       - name: Commit and push
+        id: commit
         working-directory: site
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A content/2.packages content/data/packages.json
           if git diff --cached --quiet; then
-            echo "No documentation changes."; exit 0
+            echo "No documentation changes."
+            echo "synced=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
           target_branch="${GITHUB_REF_NAME:-main}"
           git commit -m "docs($PACKAGE): sync documentation from $VERSION"
           git pull --rebase origin "$target_branch"
           git push origin "HEAD:$target_branch"
+          echo "synced=true" >> "$GITHUB_OUTPUT"
+          echo "branch=$target_branch" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: sync
+    if: needs.sync.outputs.synced == 'true'
+    uses: ./.github/workflows/deploy.yml
+    with:
+      ref: ${{ needs.sync.outputs.branch }}

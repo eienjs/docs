@@ -3,6 +3,12 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_call:
+    inputs:
+      ref:
+        description: Git ref to checkout and deploy
+        required: false
+        type: string
   workflow_dispatch:
 
 permissions:
@@ -20,6 +26,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v6

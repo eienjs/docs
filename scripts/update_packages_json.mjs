@@ -4,7 +4,7 @@
 //
 // Optional metadata in the package's package.json:
 //   "eienjs": { "title": "Permission", "icon": "i-tabler-shield-check", "category": "adonisjs" | "tooling" }
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
@@ -51,4 +51,31 @@ if (index === -1) {
 }
 
 writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`);
+
+const docsDir = path.resolve(import.meta.dirname, `../content/2.packages/${name}`);
+if (flags.includes('--docs') && existsSync(docsDir)) {
+  const sections = new Set(readdirSync(docsDir)
+    .filter((item) => !item.startsWith('.'))
+    .map((item) => item.replace(/^\d+\./, '').replace(/\.md$/, '')));
+
+  const walk = (dir) => {
+    for (const item of readdirSync(dir)) {
+      const fullPath = path.join(dir, item);
+      if (statSync(fullPath).isDirectory()) {
+        walk(fullPath);
+      } else if (fullPath.endsWith('.md')) {
+        const original = readFileSync(fullPath, 'utf8');
+        const updated = original.replaceAll(/\]\(\/([^)/#]+)(\/[^)]*)?\)/g, (match, firstSeg, rest = '') => {
+          return sections.has(firstSeg) ? `](/packages/${name}/${firstSeg}${rest})` : match;
+        });
+        if (updated !== original) {
+          writeFileSync(fullPath, updated);
+        }
+      }
+    }
+  };
+
+  walk(docsDir);
+}
+
 console.log(`Updated ${name}`);

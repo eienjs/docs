@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    siteUrl: 'https://eienjs.com',
     public: {
       siteUrl: 'https://eienjs.com',
     },

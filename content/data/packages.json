@@ -3,11 +3,12 @@
     {
       "name": "adonisjs-permission",
       "title": "Permission",
-      "description": "Associate users with roles and permissions.",
+      "description": "Associate users with roles and permissions in your AdonisJS app",
       "icon": "i-tabler-shield-check",
       "category": "adonisjs",
       "repo": "https://github.com/eienjs/adonisjs-permission",
-      "docs": false
+      "version": "1.0.0",
+      "docs": true
     },
     {
       "name": "adonisjs-api-query",

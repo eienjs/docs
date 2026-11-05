@@ -33,11 +33,12 @@
     {
       "name": "adonisjs-simple-auth",
       "title": "Simple Auth",
-      "description": "Single authentication using an API key.",
+      "description": "Single API key authentication for AdonisJS v7 applications",
       "icon": "i-tabler-key",
       "category": "adonisjs",
       "repo": "https://github.com/eienjs/adonisjs-simple-auth",
-      "docs": false
+      "version": "2.1.0",
+      "docs": true
     },
     {
       "name": "adonisjs-sentry",

@@ -40,15 +40,6 @@
       "docs": false
     },
     {
-      "name": "adonisjs-jsend",
-      "title": "JSend",
-      "description": "Simple helpers to generate JSend-compliant JSON responses.",
-      "icon": "i-tabler-braces",
-      "category": "adonisjs",
-      "repo": "https://github.com/eienjs/adonisjs-jsend",
-      "docs": false
-    },
-    {
       "name": "adonisjs-sentry",
       "title": "Sentry",
       "description": "Sentry service provider for AdonisJS v7.",

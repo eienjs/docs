@@ -14,7 +14,31 @@ const routePath = computed(() => withoutTrailingSlash(route.path));
 
 const { data: page } = await useAsyncData(() => routePath.value, async () => queryCollection('docs').path(routePath.value).first(), { watch: [routePath] });
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
+  // Folders without an index page (e.g. /packages/<name>/getting-started) redirect to their first page.
+  const findFolder = (items: ContentNavigationItem[] = []): ContentNavigationItem | undefined => {
+    for (const item of items) {
+      if (item.path === routePath.value) {
+        return item;
+      }
+      const found = findFolder(item.children);
+      if (found) {
+        return found;
+      }
+    }
+
+    return undefined;
+  };
+  const findFirstLeaf = (item?: ContentNavigationItem): string | undefined => {
+    const first = item?.children?.[0];
+
+    return first ? (first.children?.length ? findFirstLeaf(first) : first.path) : undefined;
+  };
+  const target = findFirstLeaf(findFolder(navigation?.value));
+  if (target) {
+    await navigateTo(target, { redirectCode: 302, replace: true });
+  } else {
+    throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
+  }
 }
 
 const { data: surround } = await useAsyncData(() => `${routePath.value}-surround`, async () => {
@@ -38,6 +62,13 @@ const headline = computed(() => findPageHeadline(navigation?.value, page.value?.
 // eslint-disable-next-line vue/no-ref-object-reactivity-loss
 defineOgImage('Docs', { title, description, headline: headline.value });
 
+const { data: packagesData } = await useAsyncData('packages-data', async () => queryCollection('packages').first());
+const currentPackage = computed(() => {
+  const name = (/^\/packages\/([^/]+)/.exec(routePath.value))?.[1];
+
+  return packagesData.value?.packages.find((item) => item.name === name);
+});
+
 const links = computed(() => {
   const links = [];
   if (toc.bottom.edit) {
@@ -49,12 +80,21 @@ const links = computed(() => {
     });
   }
 
+  if (currentPackage.value?.repo) {
+    links.push({
+      icon: 'i-tabler-brand-github',
+      label: `${currentPackage.value.title} repository`,
+      to: currentPackage.value.repo,
+      target: '_blank',
+    });
+  }
+
   return [...links, ...toc.bottom.links].filter(Boolean);
 });
 </script>
 
 <template>
-  <UPage>
+  <UPage v-if="page">
     <UPageHeader
       :title="page!.title"
       :description="page!.description"
@@ -105,4 +145,6 @@ const links = computed(() => {
       </UContentToc>
     </template>
   </UPage>
+
+  <div v-else />
 </template>

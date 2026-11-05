@@ -13,11 +13,12 @@
     {
       "name": "adonisjs-api-query",
       "title": "API Query",
-      "description": "Easily build Lucid queries from API requests.",
-      "icon": "i-tabler-filter",
+      "description": "Easily build Lucid queries from API requests",
+      "icon": "i-tabler-filter-search",
       "category": "adonisjs",
       "repo": "https://github.com/eienjs/adonisjs-api-query",
-      "docs": false
+      "version": "3.0.1",
+      "docs": true
     },
     {
       "name": "adonisjs-soft-deletes",

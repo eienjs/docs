@@ -22,11 +22,12 @@
     {
       "name": "adonisjs-soft-deletes",
       "title": "Soft Deletes",
-      "description": "Soft deletes for AdonisJS models.",
-      "icon": "i-tabler-trash",
+      "description": "Provider-based Soft deletes for AdonisJS",
+      "icon": "i-tabler-trash-off",
       "category": "adonisjs",
       "repo": "https://github.com/eienjs/adonisjs-soft-deletes",
-      "docs": false
+      "version": "1.0.2",
+      "docs": true
     },
     {
       "name": "adonisjs-simple-auth",

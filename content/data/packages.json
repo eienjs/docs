@@ -8,7 +8,8 @@
       "category": "adonisjs",
       "repo": "https://github.com/eienjs/adonisjs-permission",
       "version": "1.0.0",
-      "docs": true
+      "docs": true,
+      "featured": true
     },
     {
       "name": "adonisjs-api-query",
@@ -18,7 +19,8 @@
       "category": "adonisjs",
       "repo": "https://github.com/eienjs/adonisjs-api-query",
       "version": "3.0.1",
-      "docs": true
+      "docs": true,
+      "featured": true
     },
     {
       "name": "adonisjs-soft-deletes",
@@ -28,7 +30,8 @@
       "category": "adonisjs",
       "repo": "https://github.com/eienjs/adonisjs-soft-deletes",
       "version": "1.0.2",
-      "docs": true
+      "docs": true,
+      "featured": true
     },
     {
       "name": "adonisjs-simple-auth",

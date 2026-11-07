@@ -50,6 +50,11 @@ export default defineAppConfig({
       upload: 'i-tabler-upload',
       warning: 'i-tabler-alert-triangle',
     },
+    prose: {
+      codeIcon: {
+        ts: 'i-tabler-brand-typescript',
+      },
+    },
     card: {
       defaultVariants: {
         variant: 'subtle',

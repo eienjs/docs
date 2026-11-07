@@ -6,30 +6,18 @@ description: Open source packages for the AdonisJS ecosystem, plus utilities and
 ::u-page-hero{class="relative overflow-hidden"}
 ---
 
-orientation: vertical
+orientation: horizontal
 ---
 
 #top
 :hero-background
 
-#headline
-:::u-badge
----
-
-label: Open source · MIT licensed
-icon: i-tabler-sparkles
-variant: subtle
-size: lg
----
-
-:::
-
 #title
-Ship AdonisJS apps [faster]{.text-primary}. Skip the boilerplate.
+Typed, tested packages for [AdonisJS]{.text-primary}.
 
 #description
-Battle-tested, type-safe packages for permissions, soft deletes, API queries, auth, Sentry and more.
-Drop them into your AdonisJS app and focus on what makes your product unique.
+Built from the code I kept rewriting across production projects. Everything is TypeScript-first and developed test-first:
+permissions, soft deletes, API queries, auth and more.
 
 #links
 :::u-button
@@ -56,6 +44,9 @@ target: _blank
 
 Star on GitHub
 :::
+
+#default
+:hero-code
 ::
 
 ::u-page-section

@@ -9,6 +9,7 @@ const packageSchema = z.object({
   repo: z.string(),
   version: z.string().optional(),
   docs: z.boolean().default(false),
+  featured: z.boolean().default(false),
 });
 
 export default defineContentConfig({

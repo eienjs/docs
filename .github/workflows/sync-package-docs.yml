@@ -107,7 +107,7 @@ jobs:
             exit 0
           fi
           target_branch="${GITHUB_REF_NAME:-main}"
-          git commit -m "docs($PACKAGE): sync documentation from $VERSION"
+          git commit -m "docs($PACKAGE):  sync documentation from $VERSION"
           git pull --rebase origin "$target_branch"
           git push origin "HEAD:$target_branch"
           echo "synced=true" >> "$GITHUB_OUTPUT"

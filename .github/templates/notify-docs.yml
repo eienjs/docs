@@ -4,7 +4,7 @@
 #   1. The package keeps its documentation in a top-level `docs/` directory
 #      (markdown, optional `.navigation.yml`, and any assets referenced from it).
 #   2. Optional metadata in `package.json`:
-#      "eienjs": { "title": "Permission", "icon": "i-tabler-shield-check", "category": "adonisjs" }
+#      "eienjs": { "title": "Permission", "icon": "i-tabler-shield-check", "category": "adonisjs", "featured": true }
 #   3. A repository secret `DOCS_SYNC_TOKEN`: a fine-grained PAT (or GitHub App token)
 #      with "Contents: read & write" on `eienjs/docs` (required to send repository_dispatch).
 name: Notify docs

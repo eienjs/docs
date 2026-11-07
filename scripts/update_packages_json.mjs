@@ -3,7 +3,7 @@
 // Usage: node scripts/update_packages_json.mjs <repo-name> <path-to-package.json> [--docs]
 //
 // Optional metadata in the package's package.json:
-//   "eienjs": { "title": "Permission", "icon": "i-tabler-shield-check", "category": "adonisjs" | "tooling" }
+//   "eienjs": { "title": "Permission", "icon": "i-tabler-shield-check", "category": "adonisjs" | "tooling", "featured": boolean }
 import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
@@ -37,6 +37,7 @@ const entry = {
   repo: previous.repo ?? `https://github.com/eienjs/${name}`,
   ...(pkg.version ? { version: pkg.version } : (previous.version ? { version: previous.version } : {})),
   docs: flags.includes('--docs') || previous.docs === true,
+  featured: meta.featured ?? previous.featured ?? false,
 };
 
 if (!['adonisjs', 'tooling'].includes(entry.category)) {

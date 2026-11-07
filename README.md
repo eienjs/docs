@@ -16,7 +16,7 @@ You can also run the sync manually from the Actions tab (`Sync package docs` →
 The landing page cards are driven by [`content/data/packages.json`](content/data/packages.json), which the same workflow updates on every sync (description and version come from the package's `package.json`; cards link to the docs once a package ships them). Optionally set the card metadata in the package's `package.json`:
 
 ```json
-"eienjs": { "title": "Permission", "icon": "i-tabler-shield-check", "category": "adonisjs" }
+"eienjs": { "title": "Permission", "icon": "i-tabler-shield-check", "category": "adonisjs", "featured": true }
 ```
 
-`category` is `adonisjs` or `tooling`. New packages are appended automatically.
+`category` is `adonisjs` or `tooling`. `featured` (optional, boolean) highlights the package on the hero banner terminal. New packages are appended automatically.

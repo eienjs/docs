@@ -40,7 +40,7 @@
       "icon": "i-tabler-key",
       "category": "adonisjs",
       "repo": "https://github.com/eienjs/adonisjs-simple-auth",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "docs": true
     },
     {

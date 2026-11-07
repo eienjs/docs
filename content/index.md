@@ -5,7 +5,6 @@ description: Open source packages for the AdonisJS ecosystem, plus utilities and
 
 ::u-page-hero{class="relative overflow-hidden"}
 ---
-
 orientation: horizontal
 ---
 
@@ -22,7 +21,6 @@ permissions, soft deletes, API queries, auth and more.
 #links
 :::u-button
 ---
-
 to: /getting-started
 size: xl
 trailing-icon: i-tabler-arrow-right
@@ -33,7 +31,6 @@ Get started
 
 :::u-button
 ---
-
 icon: i-tabler-brand-github
 color: neutral
 variant: outline
@@ -51,7 +48,6 @@ Star on GitHub
 
 ::u-page-section
 ---
-
 title: Stop reinventing the wheel
 description: Every package solves one real problem, integrates naturally with AdonisJS and works out of the box. Install what you need, ignore the rest.
 ---
@@ -61,7 +57,6 @@ description: Every package solves one real problem, integrates naturally with Ad
 
 ::u-page-section
 ---
-
 title: Write better code, together
 description: The same tooling and standards behind every EienJS package, ready for your own projects and your own packages.
 ---
@@ -71,11 +66,9 @@ description: The same tooling and standards behind every EienJS package, ready f
 
 ::u-page-section
 ---
-
 title: Ready to build something great?
 description: Join developers who ship faster with EienJS. Found a bug or have an idea? Contributions are always welcome.
 links:
-
 - label: Get started now
   to: /getting-started
   size: xl
@@ -89,7 +82,5 @@ links:
   target: _blank
   color: neutral
   variant: outline
-
 ---
-
 ::

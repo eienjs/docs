@@ -16,5 +16,6 @@ export default eienjs({
   files: ['**/*.md'],
   rules: {
     '@stylistic/max-len': 'off',
+    'format/prettier': 'off',
   },
 });

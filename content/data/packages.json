@@ -55,11 +55,13 @@
     {
       "name": "eslint-config",
       "title": "ESLint Config",
-      "description": "The EienJS ESLint config preset.",
-      "icon": "i-tabler-checks",
+      "description": "EienJS ESLint Config",
+      "icon": "i-tabler-list-check",
       "category": "tooling",
       "repo": "https://github.com/eienjs/eslint-config",
-      "docs": false
+      "version": "2.3.2",
+      "docs": true,
+      "featured": false
     },
     {
       "name": "adonisjs-pkg-boilerplate",

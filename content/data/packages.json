@@ -46,11 +46,13 @@
     {
       "name": "adonisjs-sentry",
       "title": "Sentry",
-      "description": "Sentry service provider for AdonisJS v7.",
-      "icon": "i-tabler-bug",
+      "description": "Sentry service provider for AdonisJS",
+      "icon": "i-tabler-brand-sentry",
       "category": "adonisjs",
       "repo": "https://github.com/eienjs/adonisjs-sentry",
-      "docs": false
+      "version": "3.0.0",
+      "docs": true,
+      "featured": false
     },
     {
       "name": "eslint-config",

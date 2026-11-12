@@ -16,5 +16,7 @@ allowBuilds:
   vue-demi: false
 
 permissions:
+  '@nuxtjs/seo':
+    skills: true
   nuxt-og-image:
     skills: false

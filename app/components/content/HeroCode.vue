@@ -209,21 +209,16 @@ onBeforeUnmount(() => {
             :key="pkg.name"
             :text="pkg.title"
           >
-            <button
-              type="button"
+            <UButton
+              :icon="pkg.icon"
               :aria-label="pkg.title"
               :aria-pressed="activeIndex === idx"
-              class="flex size-8 items-center justify-center rounded-full transition"
-              :class="activeIndex === idx
-                ? 'bg-primary/20 text-primary ring-2 ring-primary/50 shadow-sm shadow-primary/30'
-                : 'bg-elevated text-muted hover:text-default hover:bg-accented/60'"
+              size="xs"
+              class="rounded-full"
+              :color="activeIndex === idx ? 'primary' : 'neutral'"
+              :variant="activeIndex === idx ? 'subtle' : 'ghost'"
               @click="selectPackage(idx)"
-            >
-              <UIcon
-                :name="pkg.icon"
-                class="size-4"
-              />
-            </button>
+            />
           </UTooltip>
         </div>
 

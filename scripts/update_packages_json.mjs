@@ -3,7 +3,7 @@
 // Usage: node scripts/update_packages_json.mjs <repo-name> <path-to-package.json> [--docs]
 //
 // Optional metadata in the package's package.json:
-//   "eienjs": { "title": "Permission", "icon": "i-tabler-shield-check", "category": "adonisjs" | "tooling", "featured": boolean }
+//   "eienjs": { "title": "Permission", "icon": "i-tabler-shield-check", "category": "adonisjs", "featured": boolean }
 import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';

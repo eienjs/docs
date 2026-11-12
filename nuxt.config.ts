@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
+    '@nuxtjs/seo',
     '@nuxt/image',
     '@nuxt/ui',
     '@nuxt/content',
@@ -11,6 +12,10 @@ export default defineNuxtConfig({
     enabled: true,
   },
   css: ['~/assets/css/main.css'],
+  site: {
+    url: 'https://eienjs.com',
+    name: 'EienJS',
+  },
   content: {
     build: {
       markdown: {
